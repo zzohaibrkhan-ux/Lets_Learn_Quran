@@ -26,8 +26,8 @@ import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { useIsMobile } from '@/hooks/use-mobile'
 
-// Import Fiqh content
-import fiqhContent from '@/data/fiqh-content.json'
+// Import jannah content
+import jannahContent from '@/data/jannah-content.json'
 
 // Icon mapping
 const iconMap: Record<string, any> = {
@@ -103,7 +103,7 @@ export default function TajweedApp() {
     setSelectedSection(null)
   }
 
-  const selectedChapterData = fiqhContent.chapters.find(
+  const selectedChapterData = jannahContent.chapters.find(
     (ch) => ch.id === selectedChapter
   )
 
@@ -112,7 +112,7 @@ export default function TajweedApp() {
   )
 
   // Sort chapters by order
-  const sortedChapters = [...fiqhContent.chapters].sort((a, b) => a.order - b.order)
+  const sortedChapters = [...jannahContent.chapters].sort((a, b) => a.order - b.order)
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950 dark:via-emerald-950 dark:to-teal-950">
@@ -139,10 +139,10 @@ export default function TajweedApp() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-green-900 dark:text-green-100">
-                  {fiqhContent.meta.title}
+                  {jannahContent.meta.title}
                 </h1>
                 <p className="text-xs text-green-700 dark:text-green-300 hidden sm:block">
-                  {fiqhContent.meta.subtitle}
+                  {jannahContent.meta.subtitle}
                 </p>
               </div>
             </motion.div>
@@ -296,10 +296,10 @@ export default function TajweedApp() {
                         <BookOpen className="h-10 w-10 text-white" />
                       </motion.div>
                       <CardTitle className="text-3xl font-bold text-green-900 dark:text-green-100 mb-2">
-                        {fiqhContent.meta.title}
+                        {jannahContent.meta.title}
                       </CardTitle>
                       <CardDescription className="text-base text-green-700 dark:text-green-300 max-w-2xl mx-auto">
-                        {fiqhContent.meta.description}
+                        {jannahContent.meta.description}
                       </CardDescription>
                     </CardHeader>
                   </Card>
@@ -558,7 +558,7 @@ export default function TajweedApp() {
       <footer className="mt-auto border-t border-green-200 dark:border-green-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 text-center">
           <p className="text-sm text-green-700 dark:text-green-300">
-            {fiqhContent.meta.subtitle} - Learning Quranic Recitation Rules
+            {jannahContent.meta.subtitle} - Learning Quranic Recitation Rules
           </p>
         </div>
       </footer>
