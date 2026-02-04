@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -15,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "آؤ قرآن سمجھیں - Lets_Learn_Quran",
-  description: "A comprehensive guide to the rules of Tajweed for proper Quranic recitation and some other topics. Learn Quranic pronunciation rules in Urdu.",
+  description:
+    "A comprehensive guide to the rules of Tajweed for proper Quranic recitation and some other topics. Learn Quranic pronunciation rules in Urdu.",
   keywords: ["Tajweed", "تجوید", "Quran", "قرآن", "Urdu", "اردو", "Quran Recitation", "Islam"],
   authors: [{ name: "Tajweed-ul-Quran" }],
   icons: {
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:  "آؤ قرآن سمجھیں - Lets_Learn_Quran",
+    title: "آؤ قرآن سمجھیں - Lets_Learn_Quran",
     description: "Learn the rules of Tajweed for proper Quranic recitation",
   },
 };
@@ -42,6 +44,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Google Analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-1YSRW2657R"
+        />
+        <Script id="ga">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1YSRW2657R');
+          `}
+        </Script>
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
