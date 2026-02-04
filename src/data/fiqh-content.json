@@ -63,7 +63,7 @@
       "id": "gates-of-jannah",
       "title": "جنت کے دروازے",
       "subtitle": "Gates of Jannah",
-      "icon": "DoorOpen",
+      "icon": "BookOpen",
       "order": 3,
       "sections": [
         {
@@ -114,7 +114,7 @@
       "id": "first-group-and-entry",
       "title": "جنت میں داخلہ اور پہلا گروہ",
       "subtitle": "Entry and First Group of Jannah",
-      "icon": "Star",
+      "icon": "BookOpen",
       "order": 5,
       "sections": [
         {
@@ -146,7 +146,7 @@
       "id": "lifestyle-in-jannah",
       "title": "جنت میں زندگی",
       "subtitle": "Lifestyle in Jannah",
-      "icon": "Home",
+      "icon": "BookOpen",
       "order": 6,
       "sections": [
         {
@@ -189,7 +189,7 @@
       "id": "jannah-markets",
       "title": "جنتی بازار",
       "subtitle": "Jannah Markets",
-      "icon": "ShoppingCart",
+      "icon": "BookOpen",
       "order": 7,
       "sections": [
         {
@@ -209,7 +209,7 @@
       "id": "last-entry-and-season",
       "title": "آخری جنتی اور موسم",
       "subtitle": "Last Entry and Weather of Jannah",
-      "icon": "Calendar",
+      "icon": "BookOpen",
       "order": 8,
       "sections": [
         {
@@ -239,7 +239,7 @@
       "id": "duas",
       "title": "دعا",
       "subtitle": "Supplication",
-      "icon": "Heart",
+      "icon": "BookOpen",
       "order": 9,
       "sections": [
         {
