@@ -1,0 +1,25 @@
+{
+  "title": "Islamic Learning Hub",
+  "subtitle": "اختیار کریں اور سیکھیں",
+  "description": "A comprehensive platform for learning Islamic information",
+  "topics": [
+    {
+      "id": "tajweed",
+      "title": "تجوید القرآن",
+      "subtitle": "Tajweed-ul-Quran",
+      "description": "قرآن کریم کے پڑھنے کے صحیح قواعد سیکھیں",
+      "icon": "BookOpen",
+      "route": "/tajweed",
+      "order": 1
+    },
+    {
+      "id": "جنت کی سیر",
+      "title": "جنت کی سیر",
+      "subtitle": "Jannah's Journey",
+      "description": "جنت کی سیر کے بارے میں جانیں",
+      "icon": "Scale",
+      "route": "/jannah",
+      "order": 2
+    }
+  ]
+}
