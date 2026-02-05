@@ -179,7 +179,11 @@ export default function LandingPage() {
       <footer className="mt-auto border-t border-green-200 dark:border-green-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-6 text-center">
           <p className="text-sm text-green-700 dark:text-green-300">
+<<<<<<< HEAD
             {topicsData.subtitle} - Learn Islamic Information
+=======
+            {topicsData.subtitle} - Learn Islamic Sciences
+>>>>>>> 43d9a39fdb475c5f4f1cbb9eba3ad5596351173c
           </p>
         </div>
       </footer>
