@@ -387,7 +387,6 @@ export default function TajweedApp() {
                             {selectedChapterData.subtitle}
                           </CardDescription>
                         </div>
-<<<<<<< HEAD
                         <Button
   variant="outline"
   onClick={() => setSelectedChapter(null)} // Go back to landing page
@@ -395,19 +394,7 @@ export default function TajweedApp() {
 >
   <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
   واپس
-</Button>
-=======
-                        <Link href="/">
-                          <Button
-                            variant="outline"
-                            className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30"
-                          >
-                            <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
-                            واپس
-                          </Button>
-                        </Link>
->>>>>>> 43d9a39fdb475c5f4f1cbb9eba3ad5596351173c
-                      </div>
+</Button> </div>
                     </CardHeader>
                   </Card>
 
