@@ -7,12 +7,12 @@ import {
   BookOpen,
   Scale,
   Book,
-  Youtube
+  Youtube,
+  MessageCircle
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { FeedbackDialog } from '@/components/feedback-dialog' // <--- Import Feedback
 
 // Import topics data
 import topicsData from '@/data/topics-list.json'
@@ -58,6 +58,9 @@ export default function LandingPage() {
     topic.description.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
+  // Simple Google Form Link
+  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeGhT8yGnlF2XqrwtQ8s-ogu-oAG4yF4YAn6t9QnJsaLsIN0Q/viewform"
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950 dark:via-emerald-950 dark:to-teal-950 flex flex-col">
       {/* Header */}
@@ -84,9 +87,22 @@ export default function LandingPage() {
             </motion.div>
           </div>
           <div className="flex items-center gap-2">
-            {/* Added Feedback Button Here */}
-            <FeedbackDialog />
-            
+            {/* Simple Feedback Button - Opens in New Tab */}
+            <a
+              href={GOOGLE_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-green-700 hover:text-green-900 dark:text-green-300 dark:hover:text-green-100"
+              >
+                <MessageCircle className="h-4 w-4 mr-2" />
+                <span className="hidden sm:inline">Feedback</span>
+              </Button>
+            </a>
+
             <a
               href="https://www.youtube.com/@Lets_Learn_Quran_ZA"
               target="_blank"
@@ -143,8 +159,6 @@ export default function LandingPage() {
         >
           <div className="relative group">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              {/* Search icon SVG handled by Input usually, but customizing here if needed. 
-                  Assuming Input component doesn't have left icon built-in based on previous imports. */}
               <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
             <Input
