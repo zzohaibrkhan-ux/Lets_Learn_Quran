@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
@@ -10,6 +11,8 @@ import {
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { FeedbackDialog } from '@/components/feedback-dialog' // <--- Import Feedback
 
 // Import topics data
 import topicsData from '@/data/topics-list.json'
@@ -42,8 +45,18 @@ const itemVariants = {
 }
 
 export default function LandingPage() {
+  // Search State
+  const [searchQuery, setSearchQuery] = useState("")
+
   // Sort topics by order
   const sortedTopics = [...topicsData.topics].sort((a, b) => a.order - b.order)
+
+  // Filter topics based on search query
+  const filteredTopics = sortedTopics.filter((topic) =>
+    topic.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    topic.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    topic.description.toLowerCase().includes(searchQuery.toLowerCase())
+  )
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950 dark:via-emerald-950 dark:to-teal-950 flex flex-col">
@@ -71,6 +84,9 @@ export default function LandingPage() {
             </motion.div>
           </div>
           <div className="flex items-center gap-2">
+            {/* Added Feedback Button Here */}
+            <FeedbackDialog />
+            
             <a
               href="https://www.youtube.com/@Lets_Learn_Quran_ZA"
               target="_blank"
@@ -118,6 +134,29 @@ export default function LandingPage() {
           </Card>
         </motion.div>
 
+        {/* Search Bar Section */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="max-w-2xl mx-auto mb-12"
+        >
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              {/* Search icon SVG handled by Input usually, but customizing here if needed. 
+                  Assuming Input component doesn't have left icon built-in based on previous imports. */}
+              <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <Input
+              type="text"
+              placeholder="تلاش کریں... (Search topics)"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-3 text-lg border-2 border-green-200 focus:border-green-500 focus:ring-green-500 dark:border-green-800 dark:focus:border-green-600 dark:focus:ring-green-600 rounded-xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm shadow-sm transition-all"
+            />
+          </div>
+        </motion.div>
+
         {/* Topics Grid */}
         <motion.div
           variants={containerVariants}
@@ -125,53 +164,64 @@ export default function LandingPage() {
           animate="visible"
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto"
         >
-          {sortedTopics.map((topic) => {
-            const Icon = iconMap[topic.icon]
-            return (
-              <motion.div
-                key={topic.id}
-                variants={itemVariants}
-                className="group"
-              >
-                <Link href={topic.route}>
-                  <motion.div
-                    whileHover={{ scale: 1.02, y: -4 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="h-full"
-                  >
-                    <Card className="h-full border-2 border-green-200 dark:border-green-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur transition-all duration-300 hover:shadow-2xl hover:border-green-400 dark:hover:border-green-600 cursor-pointer">
-                      <CardHeader>
-                        <div className="flex items-start gap-4">
-                          <motion.div
-                            whileHover={{ rotate: 5 }}
-                            className="p-4 rounded-xl bg-gradient-to-br from-green-100 to-emerald-200 dark:from-green-900/50 dark:to-emerald-900/50 shrink-0"
-                          >
-                            {Icon && <Icon className="h-8 w-8 text-green-700 dark:text-green-300" />}
-                          </motion.div>
-                          <div className="flex-1">
-                            <CardTitle className="text-2xl font-bold text-green-900 dark:text-green-100 mb-2">
-                              {topic.title}
-                            </CardTitle>
-                            <CardDescription className="text-base text-green-700 dark:text-green-300">
-                              {topic.subtitle}
-                            </CardDescription>
+          {filteredTopics.length > 0 ? (
+            filteredTopics.map((topic) => {
+              const Icon = iconMap[topic.icon]
+              return (
+                <motion.div
+                  key={topic.id}
+                  variants={itemVariants}
+                  className="group"
+                >
+                  <Link href={topic.route}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, y: -4 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="h-full"
+                    >
+                      <Card className="h-full border-2 border-green-200 dark:border-green-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur transition-all duration-300 hover:shadow-2xl hover:border-green-400 dark:hover:border-green-600 cursor-pointer">
+                        <CardHeader>
+                          <div className="flex items-start gap-4">
+                            <motion.div
+                              whileHover={{ rotate: 5 }}
+                              className="p-4 rounded-xl bg-gradient-to-br from-green-100 to-emerald-200 dark:from-green-900/50 dark:to-emerald-900/50 shrink-0"
+                            >
+                              {Icon && <Icon className="h-8 w-8 text-green-700 dark:text-green-300" />}
+                            </motion.div>
+                            <div className="flex-1">
+                              <CardTitle className="text-2xl font-bold text-green-900 dark:text-green-100 mb-2">
+                                {topic.title}
+                              </CardTitle>
+                              <CardDescription className="text-base text-green-700 dark:text-green-300">
+                                {topic.subtitle}
+                              </CardDescription>
+                            </div>
                           </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-green-700 dark:text-green-300 mb-4">
-                          {topic.description}
-                        </p>
-                        <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white">
-                          شروع کریں
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </Link>
-              </motion.div>
-            )
-          })}
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-green-700 dark:text-green-300 mb-4 line-clamp-3">
+                            {topic.description}
+                          </p>
+                          <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white">
+                            شروع کریں
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </Link>
+                </motion.div>
+              )
+            })
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-xl text-green-700 dark:text-green-300 font-medium">
+                کوئی موضوع نہیں ملا
+              </p>
+              <p className="text-sm text-green-600 dark:text-green-400 mt-2">
+                Please try a different search term
+              </p>
+            </div>
+          )}
         </motion.div>
       </main>
 
