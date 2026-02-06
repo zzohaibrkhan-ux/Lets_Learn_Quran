@@ -12,6 +12,7 @@ import {
   X,
   Menu,
   ChevronRight,
+  ChevronLeft,
   Home,
   ArrowRight,
   ScrollText,
@@ -101,6 +102,31 @@ export default function TajweedApp() {
     setSelectedSection(null)
   }
 
+  // Navigation handlers
+  const handleNextSection = () => {
+    if (!selectedChapterData || isLastSection) return
+    const nextSectionId = selectedChapterData.sections[currentSectionIndex + 1].id
+    setSelectedSection(nextSectionId)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handlePreviousSection = () => {
+    if (!selectedChapterData || isFirstSection) return
+    const prevSectionId = selectedChapterData.sections[currentSectionIndex - 1].id
+    setSelectedSection(prevSectionId)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleNextChapter = () => {
+    if (isLastChapter) return
+    const nextChapter = sortedChapters[currentChapterIndex + 1]
+    if (nextChapter) {
+      setSelectedChapter(nextChapter.id)
+      setSelectedSection(null) // Reset to chapter overview
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   const selectedChapterData = tajweedContent.chapters.find(
     (ch) => ch.id === selectedChapter
   )
@@ -111,6 +137,25 @@ export default function TajweedApp() {
 
   // Sort chapters by order
   const sortedChapters = [...tajweedContent.chapters].sort((a, b) => a.order - b.order)
+
+  // Calculate current indices
+  const currentChapterIndex = sortedChapters.findIndex((ch) => ch.id === selectedChapter)
+  const currentSectionIndex = selectedChapterData?.sections.findIndex((s) => s.id === selectedSection) ?? -1
+  const isFirstSection = currentSectionIndex === 0
+  const isLastSection = currentSectionIndex === (selectedChapterData?.sections.length ?? 0) - 1
+  const isFirstChapter = currentChapterIndex === 0
+  const isLastChapter = currentChapterIndex === sortedChapters.length - 1
+
+  const currentTopicId = 'tajweed' // Hardcoded for tajweed page
+  const allTopics = [
+    { id: 'tajweed', route: '/tajweed', title: 'تجوید القرآن' },
+    { id: 'jannah', route: '/jannah', title: 'جنت کی سیر' },
+    { id: 'hadith', route: '/hadith', title: 'حدیث' }
+  ]
+  const currentTopicIndex = allTopics.findIndex((t) => t.id === currentTopicId)
+
+  // Determine next chapter data safely
+  const nextChapterData = !isLastChapter ? sortedChapters[currentChapterIndex + 1] : null
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950 dark:via-emerald-950 dark:to-teal-950">
@@ -386,13 +431,13 @@ export default function TajweedApp() {
                           </CardDescription>
                         </div>
                         <Button
-  variant="outline"
-  onClick={() => setSelectedChapter(null)} // Go back to landing page
-  className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30"
->
-  <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
-  واپس
-</Button>
+                          variant="outline"
+                          onClick={() => setSelectedChapter(null)}
+                          className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30"
+                        >
+                          <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
+                          واپس
+                        </Button>
                       </div>
                     </CardHeader>
                   </Card>
@@ -544,6 +589,73 @@ export default function TajweedApp() {
                       </motion.div>
                     </CardContent>
                   </Card>
+
+                  {/* Section Navigation */}
+                  <div className="flex items-center justify-between gap-4 py-4">
+                    <Button
+                      variant="outline"
+                      onClick={handleBackToChapters}
+                      className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30"
+                    >
+                      <ChevronRight className="h-4 w-4 mr-2 rotate-180" />
+                      واپس
+                    </Button>
+
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        onClick={handlePreviousSection}
+                        disabled={isFirstSection}
+                        className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <ChevronLeft className="h-4 w-4 mr-2" />
+                        پچھلا
+                      </Button>
+
+                      <span className="text-sm text-green-600 dark:text-green-400">
+                        {currentSectionIndex + 1} / {selectedChapterData.sections.length}
+                      </span>
+
+                      <Button
+                        variant="outline"
+                        onClick={handleNextSection}
+                        disabled={isLastSection}
+                        className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        اگلا
+                        <ChevronRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Next Step Logic: Chapter or Topic */}
+                  {isLastSection && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4"
+                    >
+                      {!isLastChapter ? (
+                        // Show Next Chapter Button if not the last chapter
+                        <Button 
+                          onClick={handleNextChapter}
+                          className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white py-6 shadow-lg hover:shadow-xl transition-all"
+                        >
+                          <BookOpen className="h-5 w-5 mr-2" />
+                          اگلا باب: {nextChapterData?.title}
+                        </Button>
+                      ) : (
+                        // Show Next Topic Button if it is the last chapter
+                        <Link href={allTopics[currentTopicIndex + 1]?.route || '/'}>
+                          <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white py-6 shadow-lg hover:shadow-xl transition-all">
+                            <ArrowRight className="h-5 w-5 mr-2" />
+                            اگلا موضوع: {allTopics[currentTopicIndex + 1]?.title}
+                          </Button>
+                        </Link>
+                      )}
+                    </motion.div>
+                  )}
                 </motion.div>
               ) : null}
             </AnimatePresence>
