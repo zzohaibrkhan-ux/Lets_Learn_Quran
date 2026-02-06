@@ -1,14 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import {
   BookOpen,
   Scale,
   Book,
   Youtube,
-  MessageCircle
+  MessageCircle,
+  X
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -47,6 +48,18 @@ const itemVariants = {
 export default function LandingPage() {
   // Search State
   const [searchQuery, setSearchQuery] = useState("")
+  
+  // Feedback Prompt State
+  const [showPrompt, setShowPrompt] = useState(true)
+
+  // Auto-hide prompt after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPrompt(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [])
 
   // Sort topics by order
   const sortedTopics = [...topicsData.topics].sort((a, b) => a.order - b.order)
@@ -62,7 +75,43 @@ export default function LandingPage() {
   const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeGhT8yGnlF2XqrwtQ8s-ogu-oAG4yF4YAn6t9QnJsaLsIN0Q/viewform"
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950 dark:via-emerald-950 dark:to-teal-950 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950 dark:via-emerald-950 dark:to-teal-950 flex flex-col relative">
+      
+      {/* NEW: Feedback Prompt Popup (Auto-hides after 3s) */}
+      <AnimatePresence>
+        {showPrompt && (
+          <motion.div
+            initial={{ opacity: 0, y: -50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 20, scale: 1 }}
+            exit={{ opacity: 0, y: -50, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
+            className="fixed top-4 left-1/2 transform -translate-x-1/2 z-[60] w-[90%] md:w-auto max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-2 border-green-500 shadow-2xl rounded-xl p-4 flex items-center gap-3 cursor-pointer hover:bg-green-50 dark:hover:bg-slate-800 transition-colors"
+            onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
+          >
+            <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center shrink-0">
+              <MessageCircle className="h-5 w-5 text-green-700 dark:text-green-300" />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-bold text-green-900 dark:text-green-100 leading-tight">
+                Please share your feedback
+              </p>
+              <p className="text-xs text-green-600 dark:text-green-400">
+                Help us improve this app
+              </p>
+            </div>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation() // Prevent link opening
+                setShowPrompt(false)
+              }}
+              className="text-green-400 hover:text-green-600 dark:text-green-500 dark:hover:text-green-300"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <header className="sticky top-0 z-50 border-b bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -87,7 +136,6 @@ export default function LandingPage() {
             </motion.div>
           </div>
           <div className="flex items-center gap-2">
-            {/* Simple Feedback Button - Opens in New Tab */}
             <a
               href={GOOGLE_FORM_URL}
               target="_blank"
@@ -102,7 +150,6 @@ export default function LandingPage() {
                 <span className="hidden sm:inline">Feedback</span>
               </Button>
             </a>
-
             <a
               href="https://www.youtube.com/@Lets_Learn_Quran_ZA"
               target="_blank"
