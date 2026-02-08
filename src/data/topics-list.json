@@ -20,6 +20,15 @@
       "icon": "Scale",
       "route": "/jannah",
       "order": 2
+    },
+    {
+      "id": "سورة الفاتحہ",
+      "title": "سورة الفاتحہ",
+      "subtitle": "Surah Fateha",
+      "description": "سورۃ الفاتحہ: مختصر خلاصہ اور فضائل",
+      "icon": "BookOpen",
+      "route": "/fatiha",
+      "order": 3
     }
   ]
 }

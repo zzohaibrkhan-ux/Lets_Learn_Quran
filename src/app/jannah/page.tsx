@@ -152,7 +152,7 @@ export default function JannahApp() {
   const allTopics = [
     { id: 'tajweed', route: '/tajweed', title: 'تجوید القرآن' },
     { id: 'jannah', route: '/jannah', title: 'جنت کی سیر' },
-    { id: 'hadith', route: '/hadith', title: 'حدیث' }
+    { id: 'fatiha', route: '/fatiha', title: 'سورة الفاتحہ کا تعارف، فضیلت اور خلاصہ' }
   ]
   const currentTopicIndex = allTopics.findIndex((t) => t.id === currentTopicId)
 
