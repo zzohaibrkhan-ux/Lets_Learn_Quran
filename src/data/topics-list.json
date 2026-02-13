@@ -29,6 +29,15 @@
       "icon": "BookOpen",
       "route": "/fatiha",
       "order": 3
+    },
+    {
+      "id": "سلطان صلاح الدین ایوبی",
+      "title": "سلطان صلاح الدین ایوبی",
+      "subtitle": "Sultan Salahuddin Ayyubi",
+      "description": "سلطان صلاح الدین ایوبی کی زندگی",
+      "icon": "User",
+      "route": "/salahuddin",
+      "order": 4
     }
   ]
 }

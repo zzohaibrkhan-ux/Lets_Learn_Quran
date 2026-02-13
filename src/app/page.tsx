@@ -7,6 +7,7 @@ import {
   BookOpen,
   Scale,
   Book,
+  User,
   Youtube,
   MessageCircle,
   X
@@ -22,6 +23,7 @@ const iconMap: Record<string, any> = {
   BookOpen,
   Scale,
   Book,
+  User,
 }
 
 const containerVariants = {
