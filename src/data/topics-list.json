@@ -10,7 +10,8 @@
       "description": "قرآن کریم کے پڑھنے کے صحیح قواعد سیکھیں",
       "icon": "BookOpen",
       "route": "/tajweed",
-      "order": 1
+      "order": 1,
+      "category": "Islamic Knowledge"
     },
     {
       "id": "جنت کی سیر",
@@ -19,7 +20,8 @@
       "description": "جنت کی سیر کے بارے میں جانیں",
       "icon": "Scale",
       "route": "/jannah",
-      "order": 2
+      "order": 2,
+      "category": "Islamic Knowledge"
     },
     {
       "id": "سورة الفاتحہ",
@@ -28,7 +30,8 @@
       "description": "سورۃ الفاتحہ: مختصر خلاصہ اور فضائل",
       "icon": "BookOpen",
       "route": "/fatiha",
-      "order": 3
+      "order": 3,
+      "category": "Quran"
     },
     {
       "id": "سلطان صلاح الدین ایوبی",
@@ -37,7 +40,18 @@
       "description": "سلطان صلاح الدین ایوبی کی زندگی",
       "icon": "User",
       "route": "/salahuddin",
-      "order": 4
+      "order": 4,
+      "category": "Islamic History"
+    },
+    {
+      "id": "سورھ البقرہ",
+      "title": "سورھ البقرہ",
+      "subtitle": "Surah Al-Baqarah",
+      "description": "سورھ البقرہ: مختصر خلاصہ اور فضائل",
+      "icon": "User",
+      "route": "/baqarah",
+      "order": 5,
+      "category": "Quran"
     }
   ]
 }
