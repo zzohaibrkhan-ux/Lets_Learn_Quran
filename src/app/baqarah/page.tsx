@@ -591,7 +591,7 @@ export default function BaqarahApp() {
                           <div className="space-y-3 pt-4">
                              <h3 className="text-lg font-bold text-green-900 dark:text-green-100 flex items-center gap-2">
                               <ImageIcon className="h-5 w-5" />
-                              تصویریں
+                              قرآنی آیات
                             </h3>
                             <div className="space-y-4">
                               {selectedSectionData.images.map((imgSrc, index) => (
