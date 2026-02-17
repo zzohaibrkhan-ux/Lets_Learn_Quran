@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "آؤ قرآن سمجھیں - Lets_Learn_Quran",
-    description: "Learn the rules of Tajweed for proper Quranic recitation",
+    description: "A comprehensive guide on Quranic recitation, Islamic Information, History and some other topics in Urdu",
     url: "",
     siteName: "Lets_Learn_Quran",
     type: "website",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "آؤ قرآن سمجھیں - Lets_Learn_Quran",
-    description: "Learn the rules of Tajweed for proper Quranic recitation",
+    description: "A comprehensive guide on Quranic recitation, Islamic Information, History and some other topics in Urdu",
   },
 };
 
