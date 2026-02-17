@@ -151,7 +151,7 @@ export default function BaqarahApp() {
   const allTopics = [
     { id: 'fatiha', route: '/fatiha', title: 'سورة الفاتحہ' },
     { id: 'baqarah', route: '/baqarah', title: 'سورھ البقرہ' },
-    { id: 'salahuddin', route: '/salahuddin', title: 'سلطان صلاح الدین ایوبی' }
+    { id: '', route: '', title: 'Main Page' }
   ]
   const currentTopicIndex = allTopics.findIndex((t) => t.id === currentTopicId)
   const nextChapterData = !isLastChapter ? sortedChapters[currentChapterIndex + 1] : null
