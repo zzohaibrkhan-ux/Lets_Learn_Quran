@@ -149,7 +149,7 @@ export default function fatihaApp() {
   const currentTopicId = 'fatiha' // Hardcoded for fatiha page
   const allTopics = [
     { id: 'fatiha', route: '/fatiha', title: 'تجوید القرآن' },
-    { id: 'salahuddin', route: '/salahuddin', title: 'سلطان صلاح الدین ایوبی' },
+    { id: 'baqarah', route: '/baqarah', title: 'سورھ البقرہ' },
     { id: 'fatiha', route: '/fatiha', title: 'سورة الفاتحہ کا تعارف، فضیلت اور خلاصہ' }
   ]
   const currentTopicIndex = allTopics.findIndex((t) => t.id === currentTopicId)
