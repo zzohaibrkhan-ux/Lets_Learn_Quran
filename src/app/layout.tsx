@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "آؤ قرآن سمجھیں - Lets_Learn_Quran",
   description:
-    "A comprehensive guide to the rules of Tajweed for proper Quranic recitation and some other topics. Learn Quranic pronunciation rules in Urdu.",
-  keywords: ["Tajweed", "تجوید", "Quran", "قرآن", "Urdu", "اردو", "Quran Recitation", "Islam"],
+    "A comprehensive guide on Quranic recitation, Islamic Information, History and some other topics in Urdu",
+  keywords: ["Tajweed", "تجوید", "Quran", "قرآن", "Urdu", "اردو", "Quran Recitation", "Islam","Islamic History","Salahuddin"],
   authors: [{ name: "Tajweed-ul-Quran" }],
   icons: {
     icon: "https://res.cloudinary.com/dkhv1yqda/image/upload/v1769557395/Untitled_design__2_-removebg-preview_ximgkt.png",
